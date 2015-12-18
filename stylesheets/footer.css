@@ -1,0 +1,43 @@
+#footer {
+	width: 100%;
+	height: 6%;
+	min-height: 34px;
+	text-align: center;
+	position: relative;
+	background-color: #A68E08;
+	color: black;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+.border {
+	border-left: 2px solid black;
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+#adminbutton {
+	float: right;
+	width: 100px;
+	background: #A68E08;
+	color: black;
+	cursor: pointer;
+	height: 34px;
+	box-sizing: border-box;
+	position: relative;
+	/*border: 1px solid pink;*/
+}
+
+#adminbuttion div {
+	position: relative;
+}
+
+#footertext {
+	width: auto;
+	padding: 10px;
+	margin-left: 100px;
+	/*border: 1px solid pink;*/
+	display: inline-block;
+}

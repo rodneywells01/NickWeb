@@ -1,0 +1,96 @@
+.contactheader div {
+	margin-right: 20%;
+	/*border-top: 1px solid #A68E08;*/
+}
+
+.contactinfo {
+	padding-left: 10px;
+	text-align: center;
+}
+
+#socialmedia {
+	width: 100%;
+	text-align: center;
+	overflow: visible;
+}
+
+.socialinput {
+	display: inline-block;
+}
+
+.socialmediawrap {
+	/*Wrap for each social media icon*/
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#socialmediaadmin {
+	width: 100%;
+}
+
+.iconwrap {
+	background-color: #A68E08;
+	border-radius: 10px;
+	width: 55px;
+	height: 55px;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+}
+
+#contactmessage {
+	text-align: left;
+	font-size: 14px;
+	padding-top: 20px;
+	padding-right: 10px;
+	vertical-align: top;
+}
+
+.contacticon img {
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.contacticon {
+	text-align: right;
+}
+
+/*.botline {
+	border-bottom: 1px solid #A68E08;
+}*/
+
+.savebutton {
+	text-align: center;
+}
+
+.savebutton input {
+	margin-top: 2px;
+}	
+
+input {
+	margin-bottom: 6px;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-ms-transition: none;
+	-o-transition: none;
+	outline: none;
+	/*border: 1px solid pink;*/
+}
+
+.noborderfocus:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.noborderfocus {
+	-webkit-transition: none;
+	-moz-transition: none;
+	-ms-transition: none;
+	-o-transition: none;
+	outline: none;
+	border: 1px solid pink;
+}
