@@ -1,0 +1,20 @@
+#sideimage {
+	width: 60%;
+	height: 30%;
+}
+
+.aboutcontentcontainer {
+	height: 80%;
+	text-align: left;
+	/*overflow: hidden;*/
+	position: relative;
+}
+
+form {
+	height: inherit;
+}
+
+.aboutinput {
+	height: 75%;
+	width: 100%;
+}

@@ -1,0 +1,37 @@
+#songintro {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.songcell{
+	padding-top: 10px;
+	padding-left: 20px;
+	width: 40%;
+}
+
+.deletesongcell{
+	width: 80px;
+	position: relative;
+}
+
+#maincontent td {
+	text-align: center;
+}
+
+#maincontent {
+	border-collapse: separate;
+}
+
+.songli {
+	padding: 20px;
+}
+
+.songcontrol {
+	min-width: 50px;
+	width: 10%;
+}
+
+#addsong {
+	border-top: 1px solid #A68E08;
+	margin-top: 10px;
+}

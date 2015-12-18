@@ -1,0 +1,82 @@
+#contactverticalwrap {
+	position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 60%;
+    -webkit-font-smoothing: antialiased;
+}
+
+.sidecol {
+	display: table-cell;
+	text-align: left;
+	width: 25%;
+	height: 100%;
+}
+
+.contactrow {
+	display: table;
+	width: 100%;
+	/*position: relative;*/
+	vertical-align: middle;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #A68E08;
+}
+
+.contacticon {
+	float: left;
+}
+
+.contactinfo {
+	vertical-align: middle;
+	text-align: center;
+	display: table-cell;
+}
+.contactrow * {
+	display: inline-block;
+}
+
+.iconwrap img {
+	width: 60px;
+	cursor: pointer;
+	margin-right: 20px;
+	text-align: left;
+}
+
+input {
+	margin-bottom: 6px;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-ms-transition: none;
+	-o-transition: none;
+	outline: none;
+	/*border: 1px solid pink;*/
+}
+
+.noborderfocus:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.noborderfocus {
+	-webkit-transition: none;
+	-moz-transition: none;
+	-ms-transition: none;
+	-o-transition: none;
+	outline: none;
+	border: 1px solid pink;
+}
+
+.sidecolumn {
+	display: table-cell;
+	width: 20%;
+	box-sizing: border-box;
+}
+
+.botline {
+	display: table-cell;
+	width: 60%;
+	text-align: center;
+	box-sizing: border-box;
+}
