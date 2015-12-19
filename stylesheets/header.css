@@ -11,7 +11,8 @@
 	/*background-color: black;*/
 	/*background-image: url("../icons/newbackgroundpicgold.jpg");   */
 	background-image: url("../icons/stockholmpossibletogether.jpg");   
-	
+		/*background-image: url("../icons/newbackgroundpic.jpg");   */
+
 	-webkit-background-size: cover; /* For WebKit*/
     -moz-background-size: cover;    /* Mozilla*/
     -o-background-size: cover;      /* Opera*/
@@ -42,7 +43,6 @@
 	height: auto;
 	width: auto;
 	vertical-align: middle;
-
 }
 
 #websitecontent {

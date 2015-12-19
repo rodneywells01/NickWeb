@@ -158,13 +158,13 @@ textarea {
 
 .title {
 	padding-top: 30px;
-	/*padding-bottom: 5px;*/
+	padding-bottom: 30px;
 	text-align: center;
 	white-space: nowrap;
 }
 
 .left {
-	position: absolute;
+	position: relative;
 	top: 0%;
 	left: 0%;
 }
@@ -180,6 +180,16 @@ textarea {
 	height: 100%;
 	box-sizing: border-box;
 	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 10px;
+}
+
+.rowcontent {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	display: inline-block;
+	margin-bottom: 10px;
 }
 
 #centercolumn {

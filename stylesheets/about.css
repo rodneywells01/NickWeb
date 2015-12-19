@@ -4,10 +4,14 @@
 }
 
 .aboutcontentcontainer {
-	height: 80%;
+	height: auto;
 	text-align: left;
 	/*overflow: hidden;*/
 	position: relative;
+	padding-left: 10%;
+	padding-right: 10%;
+	text-align: justify;
+    text-justify: inter-word;
 }
 
 form {

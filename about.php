@@ -53,8 +53,8 @@ $data = mysqli_fetch_assoc($result)
 <form action="about.php" method="post"> 
 <?php } ?>
 
-<div class="left columncontent">
-	<div class="title shortrow emphasis">Biography</div>
+<div class="rowcontent">
+	<div style="text-align:center;" class="title shortrow emphasis">Biography</div>
 	<div class="aboutcontentcontainer">
 		<?php 
 		if ($admin) { 
@@ -71,14 +71,15 @@ $data = mysqli_fetch_assoc($result)
 		?>
 	</div>	
 </div>
-<div id="centercolumn" class="columncontent">
-	<?php if($admin) { ?>
-		<div class="buttonwrap"><input class="mybutton centercontent" type="submit" name="submit" value="Save Changes"/></div>
-	<?php } ?>
-</div>
-<div class="right columncontent">
-	<div class="title shortrow emphasis">Services</div>
-	<div class="aboutcontentcontainer">
+<?php if($admin) { ?>
+	<div id="centercolumn" class="columncontent">
+			<div class="buttonwrap"><input class="mybutton centercontent" type="submit" name="submit" value="Save Changes"/></div>
+	</div>
+<?php } ?>
+
+<div class="rowcontent">
+	<div style="text-align:center;" class="title emphasis">Services</div>
+	<div class="aboutcontentcontainer" >
 		<?php 
 		if ($admin) { 
 			echo "<textarea class=\"aboutinput\" name=\"services\" >";

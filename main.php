@@ -60,12 +60,11 @@ $mainpagedata = mysqli_fetch_assoc($result);
 
 ?>
 
-
 <?php if ($admin) { ?>
 <form action="main.php" method="post">
 <?php } ?>
 <div class="left columncontent">
-	<div style="position:relative;"class="title shortrow emphasis">
+	<div style="position:relative;"class="title emphasis">
 		<?php $output = ""; ?>
 		<?php if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name =\"title\" value=\""; }
 		else {$output .= "<div class=\"overflowcenter\">"; } ?>
@@ -92,7 +91,7 @@ $mainpagedata = mysqli_fetch_assoc($result);
 	<?php } ?>
 </div>
 <div class="right columncontent">
-	<div class="title shortrow emphasis">
+	<div class="title emphasis">
 		Events
 	</div>
 	<div id="eventscontainer">
@@ -110,8 +109,8 @@ $mainpagedata = mysqli_fetch_assoc($result);
 				<a class="eventlinkwrap" href="events">
 					<div class="hvr-border-fade eventwrap">
 						<div class="eventdatewrap">
-							<div class="eventdisplay centercontent">
-								<div class="centercontent">
+							<div class="eventdisplay ">
+								<div class="">
 									<?php echo strtoupper(date("M", strtotime($event["datetime"]))); ?>
 									<br />
 									<?php echo date("j", strtotime($event["datetime"])); ?>

@@ -5,7 +5,6 @@ $(document).ready(function(){
 	var hiddendivcheck = document.getElementById("pagereturndiv");
 	if (hiddendivcheck != null) {
 		currentpage = hiddendivcheck.innerHTML;
-		console.log("Current page:" + currentpage);
 		hiddendivcheck.remove();
 		switch_tab_highlight(currentpage, "main")
 		currentpage = load_content(currentpage);
@@ -32,22 +31,16 @@ $(document).ready(function(){
 
 function switch_tab_highlight(newpage, oldpage) {
 	// Remove effect on old tab. 
-	console.log("|"+oldpage+"|");
-	console.log("|"+newpage+"|");
 	var oldtab = $('a[href="' + oldpage + '"] div');
-	console.log(oldtab.html());
 
 	oldtab.removeClass("hvr-fade-selected");
 	oldtab.removeClass("tabselected");
-	console.log("Removing effect from: " + oldpage);
 
 	// Add effect on new tab.
 	var newtab = $('a[href="' + newpage + '"] div');
 
-	console.log(newtab.html());
 	newtab.addClass("hvr-fade-selected");
 	newtab.addClass("tabselected");
-	console.log("adding effect from: " + newpage);
 }
 
 function handle_transitions(page, contentdiv) {
@@ -92,7 +85,6 @@ function detectWidth () {
 
 	// Get the scrollbar width
 	var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-	console.log(scrollbarWidth); // Mac:  15
 
 	// Delete the DIV 
 	document.body.removeChild(scrollDiv);
@@ -103,11 +95,9 @@ function detectWidth () {
 function fixScreenWidth(scrollBarWidth) {
 	// Adjust the screen width for the scroll bar.
 	if ($(window).hasScrollBar()) {
-		console.log("Has a scroll bar!");
 		var sidewidth = parseInt($("#screen").css("margin-left"));
 		$('#screen').css("margin-left", sidewidth + scrollBarWidth / 2);
 	} else {
-		console.log("no scroll bar!");
 	}
 	
 	// $('#screen').css("margin-left", "300px");
