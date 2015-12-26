@@ -11,7 +11,10 @@
 	/*background-color: black;*/
 	/*background-image: url("../icons/newbackgroundpicgold.jpg");   */
 	background-image: url("../icons/stockholmpossibletogether.jpg");   
-		/*background-image: url("../icons/newbackgroundpic.jpg");   */
+		background-image: url("../icons/newbackgroundpic.jpg"); 
+				background-image: url("../icons/sepiatest.jpg"); 
+
+		/*background-image: url("https://static.happywall.co.uk/uploads/galleri/601/stockholm_sunset_large.jpg");  */
 
 	-webkit-background-size: cover; /* For WebKit*/
     -moz-background-size: cover;    /* Mozilla*/
@@ -29,9 +32,9 @@
 #swagtest {
 	/*border-right: 12px solid #766507;*/
 	/*border-left: 12px solid #766507;*/
-		border-right: 12px solid #383001;
+/*		border-right: 12px solid #383001;
 	border-left: 12px solid #383001;
-	padding: 0;
+	padding: 0;*/
 }
 
 #pagereturndiv {
@@ -53,7 +56,7 @@
 	border-top: 4px solid #A68E08;
 	max-height: 1000px;
 	width: 100%;
-	background: black;
+	background: #000;
 	box-sizing: border-box;
 		/*-webkit-box-shadow: 10px 20px 5px -2px #000;*/
 
@@ -161,6 +164,7 @@ body {
 	width: 82%;
 	padding-left: 5%;
 	padding-right: 5%;
+	padding-bottom: 20px;
 	margin-left: auto;
 	max-width: 1200px;
 	max-height: 500px;
