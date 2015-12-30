@@ -106,10 +106,9 @@ $mainpagedata = mysqli_fetch_assoc($result);
 			$finished = false; 
 			$count = 0;
 			while(($event = mysqli_fetch_assoc($eventlistdata)) && $finished == false) { ?>
-				<a class="eventlinkwrap" href="events">
-					<div class="hvr-border-fade eventwrap">
+					<div class="hvr-border-fade" style="width: 100%; height:33%;">
 						<div class="eventdatewrap">
-							<div class="eventdisplay ">
+							<div class="eventdisplay " style="margin-bottom: 4px; margin-left: 4px;">
 								<div class="">
 									<?php echo strtoupper(date("M", strtotime($event["datetime"]))); ?>
 									<br />
@@ -126,7 +125,6 @@ $mainpagedata = mysqli_fetch_assoc($result);
 							</div>	
 						</div>						
 					</div>
-				</a>
 				<?php
 				if ($count >= 3) {
 					$finished = true;

@@ -323,6 +323,7 @@
 		/* 
 		Constructs and displays songrow based on $admin. 
 		*/
+
 		$songrow = "<tr>";
 		if($admin) {
 			// Adding Up/Down buttons and delete button for Admins. 
@@ -397,12 +398,10 @@
 
 	function display_videos($result, $maxvids, $admin) {
 		while($video = mysqli_fetch_assoc($result)) {
-			// Continually display video rows. 
-			$videorow = "";
-
+			// Continually display video rows. 			
+			$videorow = "<tr>"; 
 			if($admin) {
 				// Display admin row. 
-				$videorow .= "<tr>"; 
 			
 				// Create admin cell. 
 				$videorow .= "<td class=\"admincell\"><ul>";
@@ -421,22 +420,13 @@
 				$videorow .= "<div class=\"deletetext\">Delete Video</div></div></a></li>";
 				$videorow .= "</ul></td>";
 
-				$videorow .= create_video_cell($video);
-
-			} else if($video["id"] % 2 == 1) {
-				// Starting row
+				$videorow .= create_video_cell($video);				
+			} else {
+				// one video in row. 
 				$videorow .= "<tr>";
 				$videorow .= create_video_cell($video);
-				// remind to call Anthem and chiro
-				if($video["id"] == $maxvids) {
-					// One video last row.
-					$videorow .= "</tr>";
-				} 
-			} else {
-				// Second video in row. 
-				$videorow .= create_video_cell($video);
-				$videorow .= "</tr>";
 			}
+			$videorow .= "</tr>";
 			echo $videorow;
 		}
 	}
