@@ -71,6 +71,9 @@ $data = mysqli_fetch_assoc($result)
 		?>
 	</div>	
 </div>
+<div id="nickyoung" class="rowcontent">
+	<img  src="nickpics/076.jpg">
+</div>
 <?php if($admin) { ?>
 	<div id="centercolumn" class="columncontent">
 			<div class="buttonwrap"><input class="mybutton centercontent" type="submit" name="submit" value="Save Changes"/></div>

@@ -67,7 +67,7 @@ if (isset($_SESSION["message"])) {
 	$emailaddress = mysqli_fetch_assoc($result)["email"];
 ?>
 
-<div id="#testtest">asdfasdf</div>
+<!-- <div id="#testtest">asdfasdf</div> -->
 <?php 
 $eventdisplaybody = "<div id=\"eventdisplayrow\"></div>" . 
 					"<div id=\"eventdisplayinfo\"></div>" . 

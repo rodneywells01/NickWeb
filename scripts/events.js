@@ -37,11 +37,17 @@ function prep_email() {
 
 	//TODO: Load email from DB? Maybe?
 	var desiredevent = $("#eventdisplayrow").find("#eventname").html();	
-	var message = "Hello Nicholas! I'm visiting your site, and I just wanted to let you know that i'll be attending the event '" + desiredevent; 
-	message += "'. I'm sure it'll be a big hit. Best of luck out there!";
+	var message = "Hello Nicholas! I'm visiting your site, and I just wanted to let you know that I'll be attending the event '" + desiredevent; 
+	// message += "'. I'm sure it'll be a big hit. Best of luck out there!";
+	var title = "Attending " + desiredevent;
 	// Set message in email form. 
+	console.log("Settting title: " + title);
 	$("#emailbody").html(message);
+	$("#emailtitle").val(title);
 	$("#emailbody").removeClass("default");
+	$("#emailtitle").removeClass("default");
+	console.log($("#emailtitle").html(title));
+	validTitle = true;
 	validBody = true;
 }
 

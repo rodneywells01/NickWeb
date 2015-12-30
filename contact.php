@@ -3,7 +3,6 @@
 <?php require("includes/connection.php"); ?>
 <?php require_once("includes/validation_functions.php"); ?>
 <?php require_once("includes/session.php"); ?>
-<!-- <link rel="stylesheet" type="text/css" href="stylesheets/contact.css"> -->
 <link rel="stylesheet" type="text/css" href="stylesheets/test.css">
 <script type="text/javascript" src="scripts/email.js"></script>
 <?php $admin = logged_in(); ?>
@@ -13,14 +12,13 @@
 <?php 
 if(isset($_POST["submit"])) {
 	// Acquire data. 
-	$requiredfields = array("contactmessage", "email", 
-		"location1", "location2", "facebook", "twitter", "linkedin");
+	$requiredfields = array("email", 
+		 "facebook", "twitter", "linkedin");
 
 	validate_presences($requiredfields); 
 
 	if(empty($errors)) {
 		// All data available. 
-		$contactmessage = mysql_prep($_POST["contactmessage"]);
 		$email = mysql_prep($_POST["email"]);
 		$location1 = mysql_prep($_POST["location1"]);
 		$location2 = mysql_prep($_POST["location2"]);
@@ -28,17 +26,22 @@ if(isset($_POST["submit"])) {
 		$twitter = mysql_prep($_POST["twitter"]);
 		$linkedin = mysql_prep($_POST["linkedin"]);
 
+		if ($location1 == null) {
+			$location1 = "";
+		}
+
+		if ($location2 == null) {
+			$location2 = "";
+		}
 		// Generate Google Maps URL.
 		// Thanks http://asnsblues.blogspot.com/2011/11/google-maps-query-string-parameters.html
 		$location1nospace = str_replace(" ", "+", $location1);
 		$location2nospace = str_replace(" ", "+", $location2);
 		$gmapslocationquery = "?q=" . $location1nospace . "+" . $location2nospace; 
-		// $gmapszoomlevel = "zoom=6";
 		$gmapszoomlevel = "";
 		$gmapsrequest =  "http://maps.google.com/" . $gmapslocationquery . "&" . $gmapszoomlevel;
 
 		$query = "UPDATE contact SET ";
-		$query .= "contactmessage = '{$contactmessage}', ";
 		$query .= "email = '{$email}', ";
 		$query .= "location1 = '{$location1}', ";
 		$query .= "location2 = '{$location2}', ";
@@ -55,6 +58,16 @@ if(isset($_POST["submit"])) {
 			$_SESSION["message"] = "Contact info failed to update!";
 		}
 	} 
+
+	redirect_to("index.php?redirect=contact");
+
+}
+?>
+
+<?php 
+if (isset($_SESSION["message"])) {
+	generate_prompt("Notification", message(), 'contact');
+	echo "<script type=\"text/javascript\">prompt_popup('contact',true);</script>";
 }
 ?>
 
@@ -68,8 +81,8 @@ if(isset($_POST["submit"])) {
 	$contactinfo = mysqli_fetch_assoc($result);
 ?>
 
-<?php echo message(); ?> 
 <?php echo form_errors($errors); ?>
+
 <?php 
 // Generate form. 
 $formbody = "<div class=\"emailinputwrap\"><input id=\"emailtitle\" class=\"default noborderfocus\" type=\"text\" value=\"Title...\" /></div>
@@ -153,11 +166,9 @@ generate_prompt("Send Nick a Message!", $formbody, "email");
 		</div>
 	</div>
 	<?php if($admin) { ?>
-	<div>
-		<div class="shortrow savebutton">
-			<input type="submit" name="submit" value="Save Changes">
-			</form>
-		</div>
+	<div class="shortrow savebutton">
+		<input type="submit" name="submit" value="Save Changes">
+		</form>
 	</div>
 	<?php }	?>
 </div>

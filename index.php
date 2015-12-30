@@ -47,7 +47,7 @@ if (isset($_GET["redirect"])) {
 		<div id="banner"> <!-- Contains Name and Tagline -->			
 			<div id="name"><i>Nicholas Nasibyan</i></div>								
 			<div><img style="width: 50%;" src="divideredit.png"></div>		<!-- http://docs.creiden.com/circleflip/wp-content/uploads/2014/04/divider.jpg						 -->
-			<div id="tagline">Pianist - Future Educator - Composer</div>
+			<div id="tagline">Pianist - Composer - Organist</div>
 		</div>
 		<div id="tabs"> <!-- Cotains Navigation Tabs -->
 		<!-- hvr-fade-selected -->

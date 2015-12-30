@@ -119,6 +119,9 @@ textarea {
 	left: 0%;
 	transform: translate(0%, 50%);
 }
+.verticalnudge {
+	transform: translate(0%, 4%);
+}
 
 .verticaltextcenter2 {
 	position: absolute;

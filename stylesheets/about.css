@@ -18,6 +18,16 @@ form {
 	height: inherit;
 }
 
+#nickyoung {	
+	text-align: center;
+	margin-top: 50px;
+}
+
+#nickyoung img {
+	width: 300px;
+	height: 300px;
+}
+
 .aboutinput {
 	height: 75%;
 	width: 100%;
