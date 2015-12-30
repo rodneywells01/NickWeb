@@ -7,21 +7,8 @@
 <?php $admin = logged_in(); ?>
 <?php $errors = errors(); ?>
 <?php global $connection; ?>
-<?php
-
-/*
-For each Song: 
-- Capture in input box. 
-- Set height to 150 using string manipulation? Class manipulation? Many ways. 
-- Display songs per row. 
-*/
-
-?>
-
-
 
 <?php 
-
 // Add a song.
 if (isset($_POST["submit"])) {
 	// Is there a song to be added to the database? 

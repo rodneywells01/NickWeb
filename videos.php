@@ -35,8 +35,6 @@ if(isset($_POST["submit"]) && $admin) {
 	} else {
 		$_SESSION["message"] = "Ruh-roh! There was an error";
 	}
-	
-
 } else if (isset($_GET["deleteid"]) && $admin) {
 	// User is deleting a song. 
 	$deleteid = $_GET["deleteid"];
@@ -47,6 +45,7 @@ if(isset($_POST["submit"]) && $admin) {
 	$directiontomove = $_GET["movedirection"];
 	$destinationid = $moveid + $directiontomove;
 
+
 	// Check to see if move is performable. 
 	$query = "SELECT * FROM videos"; 
 	$result = mysqli_query($connection, $query); 
@@ -54,7 +53,7 @@ if(isset($_POST["submit"]) && $admin) {
 
 	$redirectlink = $active_page . ".php";
 	if ($destinationid < 1) {
-		// ID is too low. 
+		// ID is too low. 	
 		$_SESSION["message"] = "Cannot move this video up!"; 
 		redirect_to("index.php?redirect=videos");
 	} else if ($destinationid > $numentries) {
@@ -86,7 +85,6 @@ if(isset($_POST["submit"]) && $admin) {
 	$result = mysqli_query($connection, $query);
 	confirm_query($result);
 	
-
 	// 4 - Inserting deleted item  
 	$query = "INSERT INTO {$active_page} (";
 	$query .= " id, videocode";
@@ -98,7 +96,6 @@ if(isset($_POST["submit"]) && $admin) {
 
 	// Finished. 
 	$_SESSION["message"] = "Video positions updated!"; 
-
 	redirect_to("index.php?redirect=videos");
 }
 ?>
