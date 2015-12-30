@@ -1396,6 +1396,28 @@ transition-duration: 0.3s;
   transition-property: color, background-color;
 }
 
+.hvr-custom {
+  
+ vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  -webkit-transition-duration: 0.4s;
+  
+transition-duration: 0.4s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+}
+.hvr-custom:hover, .hvr-custom:focus, .hvr-custom:active {
+  background-color: #766507;
+  color: black
+
+}
 
 .hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {
   background-color: #A68E08;

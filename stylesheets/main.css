@@ -15,6 +15,12 @@
 #eventscontainer {
 	/*Container for all events*/
 	width: 100%;
+	cursor: pointer;
+}
+
+.eventcontainer {
+/*	transition: background-color 1s;
+	transition: color 1s;*/
 }
 
 .eventdatewrap {
@@ -24,6 +30,7 @@
 	box-sizing: border-box;
 	height: 100%;
 	position: relative;
+	margin: 3px 3px 5px 5px;
 }
 
 .eventdescriptionwrap {

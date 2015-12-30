@@ -105,11 +105,12 @@ $mainpagedata = mysqli_fetch_assoc($result);
 			
 			$finished = false; 
 			$count = 0;
+			
 			while(($event = mysqli_fetch_assoc($eventlistdata)) && $finished == false) { ?>
-					<div class="hvr-border-fade" style="width: 100%; height:33%;">
-						<div class="eventdatewrap">
-							<div class="eventdisplay " style="margin-bottom: 4px; margin-left: 4px;">
-								<div class="">
+					<div onclick="window.location.href = window.location.origin + window.location.pathname + '?redirect=events'" class="eventcontainer hvr-border-fade hvr-custom" style="width: 100%; height:33%;">
+						<div class="eventdatewrap ">
+							<div class="eventdisplay verticalnudge"  style="margin: 0;">
+								<div class="verticaltextcenter2">
 									<?php echo strtoupper(date("M", strtotime($event["datetime"]))); ?>
 									<br />
 									<?php echo date("j", strtotime($event["datetime"])); ?>
