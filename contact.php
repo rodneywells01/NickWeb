@@ -8,7 +8,9 @@
 <?php $admin = logged_in(); ?>
 <?php global $connection; ?>
 <?php $errors = errors(); ?>
-
+<?php
+    header('X-Frame-Options: GOFORIT'); 
+?>
 <?php 
 if(isset($_POST["submit"])) {
 	// Acquire data. 
@@ -25,14 +27,14 @@ if(isset($_POST["submit"])) {
 		$facebook = mysql_prep($_POST["facebook"]);
 		$twitter = mysql_prep($_POST["twitter"]);
 		$linkedin = mysql_prep($_POST["linkedin"]);
+		$homephone = mysql_prep($_POST["homephone"]);
+		$mobilephone = mysql_prep($_POST["mobilephone"]);
+		
+		if ($location1 == null) { $location1 = ""; }
+		if ($location2 == null) { $location2 = ""; }
+		if ($homephone == null) { $homephone = ""; }
+		if ($mobilephone == null) { $mobilephone = ""; }		
 
-		if ($location1 == null) {
-			$location1 = "";
-		}
-
-		if ($location2 == null) {
-			$location2 = "";
-		}
 		// Generate Google Maps URL.
 		// Thanks http://asnsblues.blogspot.com/2011/11/google-maps-query-string-parameters.html
 		$location1nospace = str_replace(" ", "+", $location1);
@@ -45,6 +47,8 @@ if(isset($_POST["submit"])) {
 		$query .= "email = '{$email}', ";
 		$query .= "location1 = '{$location1}', ";
 		$query .= "location2 = '{$location2}', ";
+		$query .= "homephone = '{$homephone}', ";
+		$query .= "mobilephone = '{$mobilephone}', ";
 		$query .= "gmaps = '{$gmapsrequest}', "; 
 		$query .= "facebook = '{$facebook}', ";
 		$query .= "twitter = '{$twitter}', ";
@@ -125,13 +129,37 @@ generate_prompt("Send Nick a Message!", $formbody, "email");
 			<?php 
 				// Display Location 
 				$output = ""; 
-				if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"location1\" value=\""; } 
-				$output .= htmlentities(trim($contactinfo["location1"])); 
-				if($admin) {$output .= "\" />"; } 
-				else {$output .= "<br /><br />"; }							
-				if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"location2\" value=\""; } 
-				$output .= htmlentities(trim($contactinfo["location2"])); 
-				if($admin) {$output .= "\" />"; } 
+				if($contactinfo["location1"] != "") {
+					if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"location1\" value=\""; } 
+					$output .= htmlentities(trim($contactinfo["location1"])); 
+					if($admin) {$output .= "\" />"; }
+					else {$output .= "<br /><br />"; }
+				}	
+
+				if($contactinfo["location2"] != "") {
+					if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"location2\" value=\""; } 
+					$output .= htmlentities(trim($contactinfo["location2"])); 
+					if($admin) {$output .= "\" />"; } 	
+					else {$output .= "<br /><br />"; }
+				}			
+
+				// Display Phone
+				// if($contactinfo["homephone"] != null) {
+					$output .= "Home: ";
+					if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"homephone\" value=\""; } 
+					$output .= htmlentities(trim($contactinfo["homephone"])); 
+					if($admin) {$output .= "\" />"; } 	
+					else {$output .= "<br /><br />"; }					
+				// }	
+
+				// if($contactinfo["mobilephone"] != null) {
+					$output .= "Mobile: ";
+					if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"mobilephone\" value=\""; } 
+					$output .= htmlentities(trim($contactinfo["mobilephone"])); 
+					if($admin) {$output .= "\" />"; } 	
+					// else {$output .= "<br /><br />"; }					
+				// }					
+				
 				echo $output; 
 			?>
 		</div>

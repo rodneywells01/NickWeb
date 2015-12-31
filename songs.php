@@ -5,14 +5,15 @@
 <?php $active_page = "songs"; ?>
 <link rel="stylesheet" type="text/css" href="stylesheets/songs.css">
 <?php $admin = logged_in(); ?>
-<?php $errors = errors(); ?>
 <?php global $connection; ?>
 
 <?php 
 // Add a song.
 if (isset($_POST["submit"])) {
+	echo "Yes submit";
 	// Is there a song to be added to the database? 
 	if(!empty($_POST["newsong"])) {
+		echo "Yes new song";
 		// User wants to add a song.
 		$songcode = $_POST["newsong"];
 
@@ -43,11 +44,20 @@ if (isset($_POST["submit"])) {
 			}
 			
 
-		} else {
-			echo form_errors($errors);
+		} else {			
+			$_SESSION["errors"] = "<ul>";
+
+			foreach ($errors as $error) {
+				echo "$error" . "<br />";
+				$_SESSION["errors"] .= "<li>" . $error . "</li>";
+			}
+
+			$_SESSION["errors"] .= "</ul>";
 		}
-		redirect_to("index.php?redirect=songs");
-	}  
+	}  else {
+		$_SESSION["message"] = "No song was provided!";
+	} 
+	redirect_to("index.php?redirect=songs");
 }
 
 // Move a song.
@@ -117,14 +127,16 @@ if (isset($_GET["deleteid"]) && $admin) {
 
 	$_SESSION["message"] = "Song removed!"; 
 }
-
 ?>
 
 
 <?php 
 if (isset($_SESSION["message"])) {
-	generate_prompt("Notification", message(), 'about');
-	echo "<script type=\"text/javascript\">prompt_popup('about');</script>";
+	generate_prompt("Notification", message(), 'songs');
+	echo "<script type=\"text/javascript\">prompt_popup('songs');</script>";
+} else if (isset($_SESSION["errors"])) {
+	generate_prompt("Notification", errors(), 'songs');
+	echo "<script type=\"text/javascript\">prompt_popup('songs');</script>";
 }
 ?>
 
