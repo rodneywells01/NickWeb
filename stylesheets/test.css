@@ -3,13 +3,6 @@
     margin: 0 auto;
 }
 
-.sidecol {
-	display: table-cell;
-	text-align: left;
-	width: 25%;
-	height: 100%;
-}
-
 .contactrow {
 	display: table;
 	width: 100%;
@@ -69,6 +62,8 @@ input {
 	display: table-cell;
 	width: 20%;
 	box-sizing: border-box;
+	vertical-align: middle;
+
 }
 
 .botline {

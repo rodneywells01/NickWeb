@@ -42,7 +42,7 @@ if (isset($_GET["redirect"])) {
 
 	<div id="header"> <!-- Content to be displayed at top of page.  -->
 		<div id="portrait"> 
-			<img src="edited.png">
+			<img src="nickpics/nickcoloredit.png">
 		</div>
 		<div id="banner"> <!-- Contains Name and Tagline -->			
 			<div id="name"><i>Nicholas Nasibyan</i></div>								
