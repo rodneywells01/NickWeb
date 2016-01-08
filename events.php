@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/events.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="scripts/email.js"></script>
+<script type="text/javascript">generate_time_picker();</script>
 <?php $admin = logged_in();  ?>
 <?php if ($admin) { compress_table($active_page); } // Fix IDs in database. ?>
 <?php global $connection; ?>
@@ -43,8 +44,12 @@ if (isset($_POST['submit']) && $admin) {
 			confirm_query($result);
 		}
 		$_SESSION["message"] = "Events Updated!";
-	}	
-	redirect_to("index.php?redirect=events");
+	}	else {
+		$_SESSION["errors"] = $errors;
+		echo $errors;
+
+	}
+	//redirect_to("index.php?redirect=events");
 } 
 ?>
 
@@ -57,7 +62,10 @@ if (isset($_SESSION["message"])) {
 	// die("there is a message! it's :" . $_SESSION["message"]);
 	generate_prompt("Notification", message(), 'event');
 	echo "<script type=\"text/javascript\">prompt_popup('event', true);</script>";
-} 
+} else if (isset($_SESSION["errors"])) {
+	generate_prompt("Error:", errors(), 'event');
+	echo "<script type=\"text/javascript\">prompt_popup('event', true);</script>";
+}
 ?>
 
 <?php 

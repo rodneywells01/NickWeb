@@ -18,17 +18,11 @@ form {
 	height: inherit;
 }
 
-#nickyoung {	
+.nickpic {	
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 25px;
 }
 
-#nickyoung img {
-	width: 300px;
-	height: 300px;
-}
+/*.nickpic img {
 
-.aboutinput {
-	height: 75%;
-	width: 100%;
-}
+}*/

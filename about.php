@@ -58,7 +58,7 @@ $data = mysqli_fetch_assoc($result)
 	<div class="aboutcontentcontainer">
 		<?php 
 		if ($admin) { 
-			echo "<textarea class=\"aboutinput\" name=\"aboutnick\" >";
+			echo "<textarea name=\"aboutnick\" >";
 		}
 		// Format string for display type. 
 		$contentstring = htmlentities($data["aboutnick"]);
@@ -71,21 +71,23 @@ $data = mysqli_fetch_assoc($result)
 		?>
 	</div>	
 </div>
-<div id="nickyoung" class="rowcontent">
-	<img  src="nickpics/076.jpg">
+
+<div class="rowcontent nickpic">
+	<img style="width:50%;" src="nickpics/076.JPG">
 </div>
-<?php if($admin) { ?>
-	<div id="centercolumn" class="columncontent">
-			<div class="buttonwrap"><input class="mybutton centercontent" type="submit" name="submit" value="Save Changes"/></div>
-	</div>
-<?php } ?>
+
+<div class="rowcontent nickpic">
+------------------------------------------------------------------------------------------
+</div>
+
+
 
 <div class="rowcontent">
 	<div style="text-align:center;" class="title emphasis">Services</div>
 	<div class="aboutcontentcontainer" >
 		<?php 
 		if ($admin) { 
-			echo "<textarea class=\"aboutinput\" name=\"services\" >";
+			echo "<textarea name=\"services\" >";
 		}
 		// Format string for display type. 						
 		$contentstring = htmlentities($data["services"]);
@@ -97,4 +99,12 @@ $data = mysqli_fetch_assoc($result)
 		<?php } ?>
 	</div>
 </div>
+
+<div class="rowcontent nickpic">
+	<img style="width:80%;" src="nickpics/theband.jpg">
+</div>
+
+<?php if ($admin) { ?>
+	<input class="mybutton centercontent" style="margin-top: 10px;"type="submit" name="submit" value="Save Changes"/>
+<?php } ?>
 </form>

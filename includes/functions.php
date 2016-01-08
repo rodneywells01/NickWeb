@@ -182,7 +182,7 @@
 		if (isset($_POST['add'])) {
 			// User is adding an event. 
 			global $connection;
-
+			global $errors;
 			// Determine add target. 
 			$query = "SELECT * FROM events";
 			$response = mysqli_query($connection, $query);

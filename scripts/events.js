@@ -6,13 +6,17 @@ $(document).ready(function() {
 	// 	hiddencontent.push(item);
 	// });
 
+
+});
+
+function generate_time_picker() {
 	// Handle addition of TIMEPICKER UI. 
 	// TIMEPICKER curtesy of http://trentrichardson.com/examples/timepicker/
 	$('.datetimeselector').datetimepicker({
 		dateFormat: "y-mm-dd",
 		timeFormat: "HH:mm:ss"
 	})
-});
+}
 
 function display_event_description(event_id) {
 	/*
