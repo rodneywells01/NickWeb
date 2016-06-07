@@ -75,10 +75,21 @@ $data = mysqli_fetch_assoc($result)
 </div>
 
 <div class="rowcontent nickpic">
+<<<<<<< HEAD
 	<img style="width:50%;" src="nickpics/076.JPG">
 </div>
 
 <div class="rowcontent nickpic" style="border-top: 1px solid;"></div>
+=======
+	<img style="width:50%;" src="nickpics/076.jpg">
+</div>
+
+<div class="rowcontent nickpic">
+------------------------------------------------------------------------------------------
+</div>
+
+
+>>>>>>> 327575b44c83e9733c1b31b95c2bb734805784a9
 
 <div class="rowcontent">
 	<div style="text-align:center;" class="title emphasis">Services</div>
@@ -124,7 +135,11 @@ $data = mysqli_fetch_assoc($result)
 </div>
 
 <div class="rowcontent nickpic">
+<<<<<<< HEAD
 	<img style="width:80%;" src="nickpics/markrusselnored.jpg">
+=======
+	<img style="width:80%;" src="nickpics/theband.jpg">
+>>>>>>> 327575b44c83e9733c1b31b95c2bb734805784a9
 </div>
 
 <?php if ($admin) { ?>

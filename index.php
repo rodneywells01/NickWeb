@@ -73,7 +73,11 @@ if (isset($_GET["redirect"])) {
 	<div id="websitecontent">
 	<div id="header"> 
 		<div id="portrait"> 
+<<<<<<< HEAD
 			<img src="nickpics/nickcoloreditoptimized4.png">
+=======
+			<img src="nickpics/nickcoloredit.png">
+>>>>>>> 327575b44c83e9733c1b31b95c2bb734805784a9
 		</div>
 		<div id="bannerwrap">
 			<div id="banner"> <!-- Contains Name and Tagline -->			

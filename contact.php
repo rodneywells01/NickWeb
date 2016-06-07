@@ -8,11 +8,17 @@
 <?php $admin = logged_in(); ?>
 <?php global $connection; ?>
 <?php $errors = errors(); ?>
+<<<<<<< HEAD
 
 <?php
 header('X-Frame-Options: GOFORIT'); 
 ?>
 
+=======
+<?php
+    header('X-Frame-Options: GOFORIT'); 
+?>
+>>>>>>> 327575b44c83e9733c1b31b95c2bb734805784a9
 <?php 
 if(isset($_POST["submit"])) {
 	// Acquire data. 
