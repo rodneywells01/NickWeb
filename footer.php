@@ -13,7 +13,7 @@
 		if ($admin) {
 			//Admin logged in. Provide log out functionality. 
 			$redirectfunc = "admin_logout();";
-			$buttontext = "Log Out";
+			$buttontext = "Logout";
 		}
 		?>
 		<div id="adminbutton" class="hvr-float hvr-grow hvr-reveal" onclick="<?php echo $redirectfunc;?>"><div class="centercontent"><?php echo $buttontext;?></div></div>

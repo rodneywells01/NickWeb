@@ -46,7 +46,6 @@ if(isset($_POST["submit"])) {
 if (isset($_SESSION["message"])) {
 	generate_prompt("Notification", message(), 'main');
 	echo "<script type=\"text/javascript\">prompt_popup('main',true);</script>";
-
 }
 ?>
 
@@ -59,6 +58,10 @@ $result = mysqli_query($connection, $query);
 $mainpagedata = mysqli_fetch_assoc($result);
 
 ?>
+
+<div id="mobileportrait" class="mobileshowme"> 
+	<img src="nickpics/nickcoloreditoptimized4.png">
+</div>
 
 <?php if ($admin) { ?>
 <form action="main.php" method="post">
@@ -77,7 +80,7 @@ $mainpagedata = mysqli_fetch_assoc($result);
 	</div>
 	<div class="maincontent">
 		<?php $output = ""; ?>
-		<?php if($admin) { $output .= "<textarea name=\"content\" class=\"customtextarea\">"; } ?>
+		<?php if($admin) { $output .= "<textarea name=\"content\">"; } ?>
 		<?php $contentstring = htmlentities($mainpagedata["content"]); ?>
 		<?php if (!$admin) { $contentstring = nl2br($contentstring); } ?>
 		<?php $output .= $contentstring; ?>
@@ -85,14 +88,9 @@ $mainpagedata = mysqli_fetch_assoc($result);
 		<?php echo $output; ?>
 	</div>
 </div>
-<div id="centercolumn" class="columncontent">
-	<?php if($admin) { ?>
-		<div class="buttonwrap"></div>
-	<?php } ?>
-</div>
 <div class="right columncontent">
 	<div class="title emphasis">
-		Events
+		Upcoming Events
 	</div>
 	<div id="eventscontainer">
 			<?php 
@@ -105,32 +103,38 @@ $mainpagedata = mysqli_fetch_assoc($result);
 			
 			$finished = false; 
 			$count = 0;
-			
+			$anEvent = false;
 			while(($event = mysqli_fetch_assoc($eventlistdata)) && $finished == false) { ?>
-					<div onclick="window.location.href = window.location.origin + window.location.pathname + '?redirect=events'" class="eventcontainer hvr-border-fade hvr-custom" style="width: 100%; height:33%;">
-						<div class="eventdatewrap ">
-							<div class="eventdisplay verticalnudge"  style="margin: 0;">
-								<div class="verticaltextcenter2">
-									<?php echo strtoupper(date("M", strtotime($event["datetime"]))); ?>
-									<br />
-									<?php echo date("j", strtotime($event["datetime"])); ?>
-								</div>
-							</div>	
-						</div>
-						<div class="eventdescriptionwrap">
-							<div class="eventdescription centercontent">
-								<?php echo htmlentities($event["name"]); ?>	
-								<br />							
-								<?php echo htmlentities($event["location"]); ?>							
-								<?php $count +=1; ?>
-							</div>	
-						</div>						
+				<div onclick="gen_eventlink(<?php echo $event["id"]?>)" class="eventcontainer hvr-border-fade hvr-custom" style="width: 100%; height:33%;">
+					<div class="eventdatewrap">
+						<div class="eventdisplay verticalnudge"  style="margin: 0;">
+							<div class="verticaltextcenter2">
+								<?php echo strtoupper(date("M", strtotime($event["datetime"]))); ?>
+								<br />
+								<?php echo date("j", strtotime($event["datetime"])); ?>
+							</div>
+						</div>	
 					</div>
+					<div class="eventdescriptionwrap">
+						<div class="eventdescription centercontent">
+							<?php echo htmlentities($event["name"]); ?>	
+							<br />							
+							<?php echo htmlentities($event["location"]); ?>							
+							<?php $count +=1; ?>
+						</div>	
+					</div>						
+				</div>
 				<?php
+				$anEvent = true;
 				if ($count >= 3) {
 					$finished = true;
 				}
 			}
+
+			if (!$anEvent) {
+				echo "Nick currently has no events! Check back soon!";
+			}
+
 			?>
 	</div>
 </div>

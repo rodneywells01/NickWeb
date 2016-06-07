@@ -182,7 +182,7 @@
 		if (isset($_POST['add'])) {
 			// User is adding an event. 
 			global $connection;
-
+			global $errors;
 			// Determine add target. 
 			$query = "SELECT * FROM events";
 			$response = mysqli_query($connection, $query);
@@ -220,47 +220,7 @@
 		}
 	}
 
-	function display_event_row($event, $admin) {
-		/*
-		Create and display an event row for events.php based on
-		- $event, which contains DB Info 
-		- $admin, which bools whether an Admin is logged in. 
-		*/
-		$eventrow = "<tr>";
-		$eventrow .= "<td>";
 
-		if ($admin) { 
-			$eventrow.= "<a href=\"events.php?delete={$event["id"]}\"><div class=\"mybutton\"><div class=\"centercontent\">Delete Me</div></div></a></td><td>";
-			$eventrow .= "<input class=\"datetimeselector\" type=\"text\" style=\"width: 110px;\" name=\"event_datetime{$event["id"]}\" value=\"";
-			$eventrow .= date("y-m-d H:i:s", strtotime($event["datetime"]));
-			$eventrow .= "\"/>";
-		} else {
-			$eventrow .= "<div class=\"eventdisplay\"><div class=\"centercontent\">";
-			$eventrow .= strtoupper(date("M", strtotime($event["datetime"])));
-			$eventrow .= "<br />";
-			$eventrow .= strtoupper(date("j", strtotime($event["datetime"])));
-			$eventrow .= "</div></div>";
-		}
-		$eventrow .= "</td><td>";
-		if($admin) { $eventrow.= "<input type=\"text\" style=\"width: 100%;\" name=\"event_name{$event["id"]}\" value=\""; }
-		$eventrow .= htmlentities($event["name"]);
-		if($admin) { $eventrow.= "\" />"; }
-		$eventrow .= "</td><td>";	
-		if($admin) { $eventrow.= "<input type=\"text\" style=\"width: 100%\" name=\"event_location{$event["id"]}\" value=\""; }					
-		$eventrow .= htmlentities($event["location"]); 
-		if($admin) { $eventrow.= "\" />"; }
-		$eventrow .= "</td><td>";
-		$eventrow .= date("g:ia", strtotime($event["datetime"]));
-		$eventrow .= "</td>";
-		if($admin) { 
-			// Add description for editing
-			$eventrow .= "<td><textarea class=\"customtextarea\" name=\"event_description{$event["id"]}\">"; 
-			$eventrow .= htmlentities($event["description"]);
-			$eventrow .= "</textarea></td>"; 
-		} 
-		$eventrow .= "</tr>";
-		echo $eventrow;
-	}
 
 	function new_display_event_row($event, $admin) {
 		/*
@@ -272,7 +232,7 @@
 		if (!$admin) {
 			$eventrow .= " hvr-border-fade";
 		}
-		$eventrow .="\"";
+		$eventrow .=" hvr-custom\"";
 		if (!$admin) {
 			$eventrow .= "onclick=\"display_event_description({$event["id"]});\"";	
 		} 		
@@ -297,7 +257,7 @@
 		if($admin) { $eventrow.= "<input type=\"text\" style=\"width: 100%\" name=\"event_location{$event["id"]}\" value=\""; }					
 		$eventrow .= htmlentities($event["location"]); 
 		if($admin) { $eventrow.= "\" />"; }
-		$eventrow .= "</div><div class=\"eventcell\">";
+		$eventrow .= "</div><div class=\"eventcell mobiledeleteme\">";
 		$eventrow .= date("g:ia", strtotime($event["datetime"]));
 		$eventrow .= "</div>";
 		if($admin) { 
@@ -383,7 +343,7 @@
 		} 
 		// Display social media icon. 
 		$contacticon .= $data[$socialmedia]; 
-		$contacticon .= "\"><div class=\"iconwrap\"><img src=\"icons/{$socialmedia}.png\"></div></a>";
+		$contacticon .= "\"><div class=\"iconwrap\"><img src=\"nickpics/{$socialmedia}.png\"></div></a>";
 		if(!$admin) {	
 			// Close div for user. 
 			$contacticon .= "</div>";

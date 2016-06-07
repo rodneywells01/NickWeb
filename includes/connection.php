@@ -3,6 +3,7 @@
  //  define("DB_USER", "root");
  //  define("DB_PASS", "");
  //  define("DB_NAME", "nickwebsite");
+  
 
 define("DB_SERVER", "aa1h2kiicn6toyg.cvpgnxpp51py.us-west-2.rds.amazonaws.com");
 define("DB_USER", "rodneywells01");

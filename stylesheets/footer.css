@@ -1,13 +1,13 @@
 #footer {
 	width: 100%;
-	height: 6%;
+	/*height: 6%;*/
 	min-height: 34px;
 	text-align: center;
 	position: relative;
 	background-color: #A68E08;
 	color: black;
 	box-sizing: border-box;
-	font-size: 14px;
+	font-size: 1em;
 }
 
 .border {

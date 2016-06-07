@@ -3,7 +3,6 @@ var validTitle = false;
 var validBody = false;
 
 $(document).ready(function() {
-	console.log("document ready!");
 	// Listeners for focus exits on forms. 
 	$("#emailtitle").blur(function() {
 		if($("#emailtitle").val() == "") {
@@ -64,6 +63,10 @@ $(document).ready(function() {
 
 function sendMessage(recipient, message, sender, title) {
 	// Send message to recipient. 
+	console.log("Rec: " + recipient);
+	console.log("mes: " + message);
+	console.log("sen: " + sender);
+	console.log("title: " + title);
 	$.ajax({
 		type: "POST",
 		url: "https://mandrillapp.com/api/1.0/messages/send.json",
@@ -84,8 +87,7 @@ function sendMessage(recipient, message, sender, title) {
 		    }
 		  }
 		 }).done(function(response) {
-		   console.log(response); // if you're into that sorta thing
-		   console.log("Email sent!");
+		   console.log(response);
 		 });
 }
 
@@ -103,13 +105,10 @@ function construct_email() {
 	$("#errorpopup").remove();
 	var errorsdetail = "";
 	var errors = false;
-	console.log("construct email function");
 	// Check for errors.
 	if (!validTitle) { errorsdetail += "<li>A <strong><i>title</i></strong> has not been provided!</li>"; errors = true;}	
 	if (!validBody) { errorsdetail += "<li>A <strong><i>body</i></strong> has not been provided!</li>"; errors = true;}	
 	if (errors) {
-			console.log("errors function");
-
 		// There was an error in user submission. 
 		var errorsmessage = "There are <strong><i>errors</i></strong> in your submission. Please fix the following: <div><ul>"; 
 		errorsmessage += errorsdetail; 
@@ -131,32 +130,27 @@ function construct_email() {
 		var user = $("#emailuser").val();
 		if(!validEmail) {user = "NicholasWebsite@nicholasnasibyan.com";}
 		var body = $("#emailbody").val();
+		var emailaddress = $("#nicksemail").text().trim(); 
+		if (!emailaddress) {
+			emailaddress = $("#clientemail").text().trim();
+		}
 
-		// Construct 
+		// Construct email message. 
 		var message = "";
 		var userinfo = "This email was sent from NicholasNasibyan.com! <br/><br/>";
 		message += userinfo; 
 		message += body;
 
 		// Message constructed. Send email. 
-		$("#promptsubmit").text("Email Sent!");
-		console.log($("#clientemail"));
-		var emailaddress = $("#clientemail").text().trim(); 
-		var test = $("#testtest").text().trim(); 
-		console.log("Sending: ");
-		console.log("1" + title);
-		console.log("2" + user);
-		console.log("3" + body);
-		console.log("4" + emailaddress);
-		console.log("5" + test);
-
+		$("#promptsubmit").text("Email Sent!");			
 		sendMessage(emailaddress, message, user, title);
 		$("#promptsubmit").css("background-color", "#A68E08");
 		$("#promptsubmit").css("color", "black");
 		
+		// Transition out
 		setTimeout(function(){
 		    remove_prompt_popup("email");
 		    update_prompt_elements();
-		}, 1200);
+		}, 1500);
 	}
 }

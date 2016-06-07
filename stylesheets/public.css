@@ -13,7 +13,7 @@
 }
 
 .emphasis {
-	font-size: 27px;
+	font-size: 2em;
 	text-align: center;
 }
 
@@ -111,6 +111,7 @@ textarea {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
 }
 
 .verticaltextcenter {
@@ -118,9 +119,13 @@ textarea {
 	top: 0%;
 	left: 0%;
 	transform: translate(0%, 50%);
+	-webkit-transform: translate(0%, 50%);
+
 }
 .verticalnudge {
 	transform: translate(0%, 4%);
+	-webkit-transform: translate(0%, 4%);
+
 }
 
 .verticaltextcenter2 {
@@ -128,7 +133,16 @@ textarea {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+
 }
+
+.absolutecenter {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
 
 /* For delete box */
 .deletecontainer {
@@ -151,7 +165,7 @@ textarea {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-
+	-webkit-transform: translate(-50%, -50%);
 }
 
 .movearrow {
@@ -173,9 +187,8 @@ textarea {
 }
 
 .right {
-	position: absolute;
-	top: 0%;
-	right: 0%;
+	position: relative;
+	float: right;
 }
 
 .columncontent {
@@ -268,30 +281,34 @@ input[type=text]:focus, textarea:focus {
 	z-index: 1;
 	
 }
-#messageprompt {
-	position: relative;
-	vertical-align: middle;
-	top: 20%;
-	width: 560px;
-	height: auto;
-	margin-left: auto;
-	margin-right: auto;
-	padding-bottom: 30px;
+#messageprompt {	
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+
+	width: 70%;
+	max-width: 700px;
 	border: 2px solid #A68E08;
 	background-color: rgba(0, 0, 0, 1);
 }
 
 #prompttitle {
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 5%;
+	height: 20%;
 }
 
 #promptbody {
 	width: 80%;
+	height: 70%;
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 50px;
+	margin-top: 5%;
+	margin-bottom: 5%;
+
 	text-align: center;
 }
 
@@ -332,7 +349,7 @@ input[type=text]:focus, textarea:focus {
 	border: 1px solid #A68E08;
 	background-color: rgba(0, 0, 0, 1);
 	padding: 10px;
-	margin-bottom: 15px;
+	margin-bottom: 3%;
 }
 
 .default {
@@ -358,6 +375,8 @@ input[type=text]:focus, textarea:focus {
 	vertical-align: middle;
 	opacity: 1;
 	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+
 	cursor:pointer;
 }
 #closeprompt div {
@@ -365,6 +384,8 @@ input[type=text]:focus, textarea:focus {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+
 	color: inherit;
 } 
 
@@ -391,4 +412,40 @@ input[type=text]:focus, textarea:focus {
 	width: 250px;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+.testcellcenter {
+	display: inline-block;
+    position: relative;
+    margin-left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+@media only screen and (max-device-width: 480px) and (orientation: portrait) {
+	.columncontent {
+		display: block;
+		width: 100%;
+		/*background-color: red;*/
+	}
+
+
+	.title {
+		white-space: normal;
+		line-height: 1em;
+	}
+}
+
+
+@media only screen and (max-device-height: 480px) and (orientation: landscape) {
+	.columncontent {
+		display: block;
+		width: 100%;
+	}
+
+
+	.title {
+		white-space: normal;
+		line-height: 1em;
+	}
 }

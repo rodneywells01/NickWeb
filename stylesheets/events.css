@@ -68,12 +68,12 @@ tr:hover {
 	width: 100%;
 }
 
-#eventdisplayinfo {
-	/*border: 1px solid #A68E08;*/
+#eventdisplayinfo {	
 	padding: 10px;
 	width: 100%;
 	margin-bottom: 20px;
 	box-sizing: border-box;
+	text-align: justify;    
 }
 
 .eventdisplaybutton {
@@ -84,3 +84,15 @@ tr:hover {
 	box-sizing: border-box;
 	cursor: pointer;
 }
+
+@media only screen and (max-width: 480px), (max-device-width: 480px) {
+	.mobiledeleteme {
+		display: none;		
+	}
+	
+	/*Headers are too large on mobile devices. */
+	#eventheader {
+		font-size: 80%; 
+	}
+}
+

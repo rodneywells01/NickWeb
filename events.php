@@ -6,10 +6,10 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/events.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="scripts/email.js"></script>
+<script type="text/javascript">generate_time_picker();</script>
 <?php $admin = logged_in();  ?>
-<?php if ($admin) { compress_table($active_page); } // Fix IDs in database. ?>
+<?php if ($admin) { compress_table($active_page); } ?>
 <?php global $connection; ?>
-
 <?php 
 check_event_delete(); 
 check_event_add(); 
@@ -43,7 +43,11 @@ if (isset($_POST['submit']) && $admin) {
 			confirm_query($result);
 		}
 		$_SESSION["message"] = "Events Updated!";
-	}	
+	}	else {
+		$_SESSION["errors"] = $errors;
+		echo $errors;
+
+	}
 	redirect_to("index.php?redirect=events");
 } 
 ?>
@@ -54,10 +58,19 @@ if (isset($_POST['submit']) && $admin) {
 
 <?php 
 if (isset($_SESSION["message"])) {
-	// die("there is a message! it's :" . $_SESSION["message"]);
 	generate_prompt("Notification", message(), 'event');
 	echo "<script type=\"text/javascript\">prompt_popup('event', true);</script>";
-} 
+} else if (isset($_SESSION["errors"])) {
+	generate_prompt("Error:", errors(), 'event');
+	echo "<script type=\"text/javascript\">prompt_popup('event', true);</script>";
+}
+?>
+
+<?php 
+if(isset($_SESSION["event"])) {
+	echo "<script>display_event_description(" . $_SESSION["event"] . ");</script>";
+	$_SESSION["event"] = null;
+}
 ?>
 
 <?php 
@@ -67,12 +80,12 @@ if (isset($_SESSION["message"])) {
 	$emailaddress = mysqli_fetch_assoc($result)["email"];
 ?>
 
-<!-- <div id="#testtest">asdfasdf</div> -->
+<div style="display:none;" id="nicksemail"><?php echo $emailaddress; ?></div>
 <?php 
 $eventdisplaybody = "<div id=\"eventdisplayrow\"></div>" . 
 					"<div id=\"eventdisplayinfo\"></div>" . 
 					"<div class=\"eventdisplaybutton hvr-fade\" onclick=\"prep_email();remove_prompt_popup('eventinfo');prompt_popup('email')\">Let Nick Know You Are Coming!</div>"; 
-					generate_prompt("Event Information", $eventdisplaybody, "eventinfo");	
+					generate_prompt("Event Information", $eventdisplaybody, "eventinfo");					
 
 $formbody = "<div class=\"emailinputwrap\"><input id=\"emailtitle\" class=\"default noborderfocus\" type=\"text\" value=\"Title...\" /></div>
 						<div class=\"emailinputwrap\"><input id=\"emailuser\" class=\"default noborderfocus\"  type=\"text\" value=\"Your Email... (Optional)\" /></div>
@@ -88,7 +101,7 @@ $formbody = "<div class=\"emailinputwrap\"><input id=\"emailtitle\" class=\"defa
 	<div class="eventcell shortrow emphasis">Date</div>
 	<div class="eventcell shortrow emphasis">Event</div>
 	<div class="eventcell shortrow emphasis">Location</div>
-	<div class="eventcell shortrow emphasis">Time</div>
+	<div class="eventcell shortrow emphasis mobiledeleteme">Time</div>
 	<?php if($admin) { ?>
 	<div class="eventcell shortrow emphasis">Details</div>
 	<?php } ?>
@@ -132,3 +145,4 @@ if ($admin) {
 		<?php } ?>
 	</div>
 </div>
+

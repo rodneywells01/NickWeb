@@ -16,16 +16,6 @@ function makeRequest() {
   });
 }
 
-// function gmailinit() {
-//   gapi.client.setApiKey('AIzaSyA5d9KwNG-4h5BbbWsiLxeUnMlj1El8k84');
-//   gapi.client.load('urlshortener', 'v1').then(makeRequest);
-// }
-
-
-// function gmailinit() {
-//   gapi.client.setApiKey('AIzaSyA5d9KwNG-4h5BbbWsiLxeUnMlj1El8k84');
-//   gapi.client.load('gmail', 'v1');
-// }
 
 var CLIENT_ID = '453516093674-kd9la3n94lm07u2h0p47blr0tec73ts5.apps.googleusercontent.com';
 // var CLIENT_ID = 'a';
@@ -43,10 +33,7 @@ function sendMessage(userId, email) {
  * @param  {String} email RFC 5322 formatted String.
  * @param  {Function} callback Function to call when the request is complete.*/
 
-  console.log("Beginning Send Email!");
   var base64EncodedEmail = btoa(email);
-  console.log(email);
-  console.log(base64EncodedEmail);
   try {
     var request = gapi.client.gmail.users.messages.send({
     'userId': userId,
@@ -54,7 +41,6 @@ function sendMessage(userId, email) {
       'raw': base64EncodedEmail
     }
     });
-     // request.execute(callback);
     console.log("EMAIL SENT!");
     console.log(request);
   } catch(err) {
