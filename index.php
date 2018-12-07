@@ -78,7 +78,7 @@ if (isset($_GET["redirect"])) {
 		<div id="bannerwrap">
 			<div id="banner"> <!-- Contains Name and Tagline -->			
 			<div id="name"><i>Nicholas Nasibyan</i></div>								
-			<div id="tagline">Pianist - Composer - Organist</div>
+			<div id="tagline">Pianist - Vocalist - Composer</div>
 		</div>
 		</div>
 		<div id="tabs"> <!-- Cotains Navigation Tabs -->
