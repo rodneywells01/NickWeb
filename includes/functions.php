@@ -357,6 +357,7 @@
 	}
 
 	function display_videos($result, $maxvids, $admin) {
+		$final_res = "";
 		while($video = mysqli_fetch_assoc($result)) {
 			// Continually display video rows. 			
 			$videorow = "<tr>"; 
@@ -368,10 +369,10 @@
 				
 				// Construct up/down arrows.
 				$videorow .= "<li>";
-				$videorow .= "<a href=\"videos.php?movedirection=-1&moveid={$video["id"]}\"><img class=\"movearrow hvr-float\" src=\"arrowup.png\"></a>";
+				$videorow .= "<a href=\"videos.php?movedirection=1&moveid={$video["id"]}\"><img class=\"movearrow hvr-float\" src=\"arrowup.png\"></a>";
 				$videorow .= "<br/>"; 
 				$videorow .= "<br/>"; 
-				$videorow .= "<a href=\"videos.php?movedirection=1&moveid={$video["id"]}\"><img class=\"movearrow hvr-sink\" src=\"arrowdown.png\"></a></li>";
+				$videorow .= "<a href=\"videos.php?movedirection=-1&moveid={$video["id"]}\"><img class=\"movearrow hvr-sink\" src=\"arrowdown.png\"></a></li>";
 
 				// Construct delete video button. 
 				$videorow .= "<li>"; 
@@ -380,15 +381,18 @@
 				$videorow .= "<div class=\"deletetext\">Delete Video</div></div></a></li>";
 				$videorow .= "</ul></td>";
 
-				$videorow .= create_video_cell($video);				
+				$videorow .= create_video_cell($video);
 			} else {
 				// one video in row. 
 				$videorow .= "<tr>";
 				$videorow .= create_video_cell($video);
 			}
 			$videorow .= "</tr>";
-			echo $videorow;
+
+			// Prepend all videos
+			$final_res = $videorow . $final_res;
 		}
+		echo $final_res;
 	}
 	
 	function create_video_cell($video) {
