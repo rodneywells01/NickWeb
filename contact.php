@@ -15,7 +15,7 @@
 if(isset($_POST["submit"])) {
 	// Acquire data. 
 	$requiredfields = array("email", 
-		 "facebook", "twitter", "linkedin");
+		 "facebook", "twitter", "linkedin", "instagram");
 
 	validate_presences($requiredfields); 
 
@@ -25,9 +25,10 @@ if(isset($_POST["submit"])) {
 		$location1 = mysql_prep($_POST["location1"]);
 		$location2 = mysql_prep($_POST["location2"]);
 		$facebook = mysql_prep($_POST["facebook"]);
+		$instagram = mysql_prep($_POST["instagram"]);
 		$twitter = mysql_prep($_POST["twitter"]);
 		$linkedin = mysql_prep($_POST["linkedin"]);
-		$homephone = mysql_prep($_POST["homephone"]);
+		// $homephone = mysql_prep($_POST["homephone"]);
 		$mobilephone = mysql_prep($_POST["mobilephone"]);
 		
 		if ($location1 == null) { $location1 = ""; }
@@ -52,6 +53,7 @@ if(isset($_POST["submit"])) {
 		$query .= "gmaps = '{$gmapsrequest}', "; 
 		$query .= "facebook = '{$facebook}', ";
 		$query .= "twitter = '{$twitter}', ";
+		$query .= "instagram = '{$instagram}', ";
 		$query .= "linkedin = '{$linkedin}' ";
 		
 		$result = mysqli_query($connection, $query); 
@@ -185,6 +187,7 @@ generate_prompt("Send Nick a Message!", $formbody, "email");
 		<table id="socialmediaadmin">
 		<?php } ?>
 		<?php display_contact_icon($admin, $contactinfo, "facebook") ?>
+		<?php display_contact_icon($admin, $contactinfo, "instagram") ?>
 		<?php display_contact_icon($admin, $contactinfo, "twitter") ?>
 		<?php display_contact_icon($admin, $contactinfo, "linkedin") ?>
 		<?php if($admin) { ?>
