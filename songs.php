@@ -64,7 +64,7 @@ if (isset($_POST["submit"])) {
 if (isset($_GET["movedirection"]) && $admin) {
 	// We're moving a songs position instead. 
 	$movesongid = $_GET["moveid"];
-	$directiontomove = $_GET["movedirection"];
+	$directiontomove = $_GET["movedirection"] * -1;
 	$destinationid = $movesongid + $directiontomove;
 
 	// Check to see if move is performable. 
@@ -74,10 +74,10 @@ if (isset($_GET["movedirection"]) && $admin) {
 
 	if ($destinationid < 1) {
 		// ID is too low. 
-		$_SESSION["message"] = "Cannot move this song up!"; 
+		$_SESSION["message"] = "Cannot move this song down!";
 		redirect_to("index.php?redirect=songs");
 	} else if ($destinationid > $numsongs) {
-		$_SESSION["message"] = "Cannot move this song down!";
+		$_SESSION["message"] = "Cannot move this song up!";
 		redirect_to("index.php?redirect=songs");
 	}
 
@@ -143,7 +143,7 @@ if (isset($_SESSION["message"])) {
 <table id="maincontent">
 	<?php 
 		// Obtain all songs. 
-		$query = "SELECT * FROM songs"; 
+		$query = "SELECT * FROM songs ORDER BY id DESC";
 		$result = mysqli_query($connection, $query); 
 
 		// Display all songs. 
