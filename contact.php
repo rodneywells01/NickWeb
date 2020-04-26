@@ -105,21 +105,44 @@ generate_prompt("Send Nick a Message!", $formbody, "email");
 	
 	<div class="title emphasis" style="margin-bottom: 0;">Connect with Nicholas</div>
 
+	<!--  Display Phone -->
+	<div class="contactrow">
+		<div class="sidecolumn">
+			<div class="iconwrap ">
+				<a><img class="hvr-grow" src="nickpics/email.png"></a>
+			</div>
+		</div>
+		
+		<div class="contactinfo botline">	
+			<?php
+				// Display Mobile phone.
+				$output = "";
+				if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"mobilephone\" value=\""; } 
+				$output .= htmlentities(trim($contactinfo["mobilephone"])); 
+				if($admin) { $output .= "\" />"; } 	
+				echo $output;
+			?>						
+		</div>
+		<div class="sidecolumn"></div>
+	</div>
+
+	<!--  Display Email -->
 	<div class="contactrow">
 		<div class="sidecolumn">
 			<div onclick="prompt_popup('email');" class="iconwrap ">
 				<a><img class="hvr-grow" src="nickpics/email.png"></a>
 			</div>
 		</div>
-		<div id="clientemail" class="contactinfo botline">	
+		
+		<div id="clientemail" class="contactinfo botline">				
 			<?php 
 				// Display email. 
 				$output = ""; 
 				if($admin) { $output.= "<input class=\"fullwidth\" type=\"text\" name=\"email\" value=\""; }
 				$output.= htmlentities($contactinfo["email"]); 
-				if($admin) {$output.= "\" />"; } 
+				if($admin) { $output.= "\" />"; } 
 				echo $output; 
-			?>
+			?>			
 		</div>
 		<div class="sidecolumn"></div>
 	</div>
@@ -128,58 +151,19 @@ generate_prompt("Send Nick a Message!", $formbody, "email");
 		<div class="sidecolumn"><div class="iconwrap hvr-grow"><a href="<?php echo $contactinfo["gmaps"]; ?>"><img src="nickpics/home.png"></a></div></div>
 		<div class="contactinfo botline ">
 			<?php 
-				// Display Location 
-				$output = ""; 
-				if($contactinfo["location1"] != "") {
-					if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"location1\" value=\""; } 
-					$output .= htmlentities(trim($contactinfo["location1"])); 
-					if($admin) {$output .= "\" />"; }
-					else {$output .= "<br /><br />"; }
-				}	
-
+				// Display Location 	
+				$output = "";		
 				if($contactinfo["location2"] != "") {
 					if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"location2\" value=\""; } 
 					$output .= htmlentities(trim($contactinfo["location2"])); 
-					if($admin) {$output .= "\" />"; } 	
-					else {$output .= "<br /><br />"; }
-				}			
-
-				// Display Phone
-				// if($contactinfo["homephone"] != null) {
-					$output .= "Home: ";
-					if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"homephone\" value=\""; } 
-					$output .= htmlentities(trim($contactinfo["homephone"])); 
-					if($admin) {$output .= "\" />"; } 	
-					else {$output .= "<br /><br />"; }					
-				// }	
-
-				// if($contactinfo["mobilephone"] != null) {
-					$output .= "Mobile: ";
-					if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"mobilephone\" value=\""; } 
-					$output .= htmlentities(trim($contactinfo["mobilephone"])); 
-					if($admin) {$output .= "\" />"; } 	
-					// else {$output .= "<br /><br />"; }					
-				// }					
-				
+					if($admin) {$output .= "\" />"; } 						
+				}														
 				echo $output; 
 			?>
 		</div>
 		<div class="sidecolumn"></div>
 	</div>
 
-<?php 
-	// Display Location 
-	// $output = "<div class=\"addressrow\">"; 
-	// if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"location1\" value=\""; } 
-	// $output .= htmlentities(trim($contactinfo["location1"])); 
-	// if($admin) {$output .= "\" />"; } 
-	// $output .= "</div><div class=\"addressrow\">";						
-	// if($admin) { $output .= "<input class=\"fullwidth\" type=\"text\" name=\"location2\" value=\""; } 
-	// $output .= htmlentities(trim($contactinfo["location2"])); 
-	// if($admin) {$output .= "\" />"; } 
-	// $output .= "</div>";
-	// echo $output; 
-?>
 
 	<div class="contactrow contactrowfinal">
 		<div id="socialmedia">
@@ -202,9 +186,3 @@ generate_prompt("Send Nick a Message!", $formbody, "email");
 	</div>
 	<?php }	?>
 </div>
-
-
-
-
-
-
