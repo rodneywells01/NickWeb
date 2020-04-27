@@ -98,7 +98,7 @@ $data = mysqli_fetch_assoc($result)
 </div>
 
 <div class="rowcontent nickpic">
-	<img style="width:80%;" src="nickpics/testing_new_header/test6.jpeg">
+	<img style="width:80%;" src="nickpics/piano_man.jpeg">
 </div>
 
 <div class="rowcontent nickpic" style="border-top: 1px solid;"></div>
