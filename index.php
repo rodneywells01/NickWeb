@@ -73,8 +73,8 @@ if (isset($_GET["redirect"])) {
 	<div id="websitecontent">
 	<div id="header"> 
 		<div id="portrait"> 
-			<img src="nickpics/nickcoloreditoptimized4.png">	
-			<!-- <img src="nickpics/testing_new_header/test5.jpeg"> -->
+			<!-- <img src="nickpics/nickcoloreditoptimized4.png">	 -->
+			<img src="nickpics/testing_new_header/test5.jpeg">
 		</div>
 		<div id="bannerwrap">
 			<div id="banner"> <!-- Contains Name and Tagline -->			
