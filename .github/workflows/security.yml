@@ -1,0 +1,55 @@
+name: PHP security regression checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.2.35', '8.3.36', '8.4.27', '8.5.12']
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: shivammathur/setup-php@d52fc211a0436f8839a587b3b5b8efddab4744ea # v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - run: python3 tests/run.py
+  apache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - run: python3 tests/apache.py
+  application:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.2.35', '8.3.36', '8.4.27', '8.5.12']
+    services:
+      database:
+        image: mariadb:11.4.13
+        env:
+          MARIADB_DATABASE: nickweb_test
+          MARIADB_USER: nickweb_fixture
+          MARIADB_PASSWORD: synthetic-local-only
+          MARIADB_ROOT_PASSWORD: synthetic-root-only
+        ports:
+          - 3306/tcp
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: shivammathur/setup-php@d52fc211a0436f8839a587b3b5b8efddab4744ea # v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mysqli
+          coverage: none
+      - run: python3 tests/e2e.py
+        env:
+          NICKWEB_USE_CI_DATABASE: '1'
+          NICKWEB_TEST_DB_PORT: ${{ job.services.database.ports[3306] }}

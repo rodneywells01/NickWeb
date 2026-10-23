@@ -18,16 +18,13 @@ function has_presence($value) {
 function validate_presences($required_fields) {
 	global $errors;
 	foreach ($required_fields as $field) {
-		$value = trim($_POST[$field]);
-		if (!has_presence($value)) {
-			$errors[$field] = fieldname_as_text($field) . " can't be blank!";
-		}		
+		validate_presence($field);
 	}
 }
 function validate_presence($required_field) {
 	global $errors;
-	$value = trim($_POST[$required_field]);
-	if (!has_presence($value)) {
+	$value = isset($_POST[$required_field]) ? $_POST[$required_field] : null;
+	if (!is_string($value) || !has_presence(trim($value))) {
 		$errors[$required_field] = fieldname_as_text($required_field) . " can't be blank!";
 	}		
 	
@@ -41,8 +38,8 @@ function validate_max_lengths($fields_with_max_lengths) {
 	global $errors;
 	// Expects an assoc. array
 	foreach($fields_with_max_lengths as $field => $max) {
-		$value = trim($_POST[$field]);
-	  if (!has_max_length($value, $max)) {
+		$value = isset($_POST[$field]) ? $_POST[$field] : null;
+	  if (!is_string($value) || !has_max_length(trim($value), $max)) {
 	    $errors[$field] = fieldname_as_text($field) . " is too long";
 	  }
 	}
