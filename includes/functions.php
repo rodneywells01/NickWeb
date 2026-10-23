@@ -1,4 +1,10 @@
 <?php
+	require_once(__DIR__ . "/request.php");
+	if (!request_has_valid_shape($_GET, $_POST)) {
+		http_response_code(400);
+		exit("Invalid request.");
+	}
+
 	function redirect_to($new_location) {
 		header("Location: " . $new_location);
 		exit;
@@ -431,4 +437,3 @@
 	
 ?>
 
-	
