@@ -12,7 +12,7 @@
 <?php header('X-Frame-Options: GOFORIT'); ?>
 
 <?php 
-if(isset($_POST["submit"])) {
+if(isset($_POST["submit"]) && $admin) {
 	// Acquire data. 
 	$requiredfields = array("email", 
 		 "facebook", "twitter", "linkedin", "instagram");
@@ -21,15 +21,18 @@ if(isset($_POST["submit"])) {
 
 	if(empty($errors)) {
 		// All data available. 
+		$existing_contact_result = mysqli_query($connection, "SELECT location1, location2, homephone, mobilephone FROM contact WHERE id = 1 LIMIT 1");
+		confirm_query($existing_contact_result);
+		$existing_contact = mysqli_fetch_assoc($existing_contact_result);
 		$email = mysql_prep($_POST["email"]);
-		$location1 = mysql_prep($_POST["location1"]);
-		$location2 = mysql_prep($_POST["location2"]);
+		$location1 = mysql_prep(isset($_POST["location1"]) ? $_POST["location1"] : $existing_contact["location1"]);
+		$location2 = mysql_prep(isset($_POST["location2"]) ? $_POST["location2"] : $existing_contact["location2"]);
 		$facebook = mysql_prep($_POST["facebook"]);
 		$instagram = mysql_prep($_POST["instagram"]);
 		$twitter = mysql_prep($_POST["twitter"]);
 		$linkedin = mysql_prep($_POST["linkedin"]);
-		// $homephone = mysql_prep($_POST["homephone"]);
-		$mobilephone = mysql_prep($_POST["mobilephone"]);
+		$homephone = mysql_prep($existing_contact["homephone"]); // Not editable in this form.
+		$mobilephone = mysql_prep(isset($_POST["mobilephone"]) ? $_POST["mobilephone"] : $existing_contact["mobilephone"]);
 		
 		if ($location1 == null) { $location1 = ""; }
 		if ($location2 == null) { $location2 = ""; }

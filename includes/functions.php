@@ -146,6 +146,7 @@
 	}
 
 	function compress_table($tablename) {
+		if (!logged_in()) { return; }
 		// Asssumes id will not be less than optimal (IDS can't auto shrink). 
 		global $connection;
 		$query = "SELECT * FROM ";
@@ -171,7 +172,7 @@
 	}
 
 	function check_event_delete() {
-		if (isset($_GET['delete'])) {
+		if (isset($_GET['delete']) && logged_in()) {
 			// User is deleting an event. 
 			global $connection;
 
@@ -180,12 +181,13 @@
 			$result = mysqli_query($connection, $query);
 			confirm_query($result);
 			$_SESSION["message"] = "Event deleted!";
+			compress_table("events");
 			redirect_to("index.php?redirect=events");
 		}
 	}
 
 	function check_event_add() {
-		if (isset($_POST['add'])) {
+		if (isset($_POST['add']) && logged_in()) {
 			// User is adding an event. 
 			global $connection;
 			global $errors;
@@ -317,6 +319,40 @@
 		$editedsongcode = str_replace($predictedheight, $desiredheight, $songcode); 
 		$mysql_safe_song = mysql_prep($editedsongcode); 
 		return $mysql_safe_song;
+	}
+
+	function swap_media_positions($table, $source, $destination) {
+		global $connection;
+		if (!logged_in() || !in_array($table, array("songs", "videos"), true)) { return false; }
+		$source = (int)$source;
+		$destination = (int)$destination;
+		if ($source < 1 || $destination < 1 || $source === $destination) { return false; }
+		try {
+			// Never attempt a destructive swap on a nontransactional legacy table.
+			$status = mysqli_query($connection, "SHOW TABLE STATUS LIKE '{$table}'");
+			$metadata = $status ? mysqli_fetch_assoc($status) : null;
+			if (!$metadata || strtolower($metadata['Engine']) !== 'innodb') { return false; }
+			if (!mysqli_begin_transaction($connection)) { return false; }
+			$rows = mysqli_query($connection, "SELECT id FROM {$table} WHERE id IN (0, {$source}, {$destination}) FOR UPDATE");
+			if (!$rows) { throw new Exception("Unable to lock media positions"); }
+			$ids = array();
+			while ($row = mysqli_fetch_assoc($rows)) { $ids[(int)$row['id']] = true; }
+			if (isset($ids[0]) || !isset($ids[$source]) || !isset($ids[$destination])) {
+				throw new Exception("Media positions changed");
+			}
+			// Swap only IDs; embed text is never deleted or reconstructed as SQL.
+			foreach (array(array($destination, 0), array($source, $destination), array(0, $source)) as $move) {
+				if (!mysqli_query($connection, "UPDATE {$table} SET id = {$move[1]} WHERE id = {$move[0]} LIMIT 1") || mysqli_affected_rows($connection) !== 1) {
+					throw new Exception("Unable to update media position");
+				}
+			}
+			if (!mysqli_commit($connection)) { throw new Exception("Unable to commit media positions"); }
+			return true;
+		} catch (Exception $error) {
+			mysqli_rollback($connection);
+			error_log("Media reordering failed and was rolled back.");
+			return false;
+		}
 	}
 
 	function remove_from_table($id, $table, $activepage) {

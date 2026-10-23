@@ -61,41 +61,8 @@ if(isset($_POST["submit"]) && $admin) {
 		redirect_to("index.php?redirect=videos");
 	}
 
-	/*
-	INSTRUCTIONS: 
-	1. Store destination in temp var. 
-	2. Delete destination. 
-	3. Update position. 
-	4. Reinsert updated destination. 
-	*/
-
-	// 1 - Selecting
-	$query = "SELECT * FROM {$active_page} WHERE id = {$destinationid} LIMIT 1;"; 
-	$result = mysqli_query($connection, $query); 
-	confirm_query($result);
-	$deleteditem = mysqli_fetch_assoc($result);
-	
-	// 2 - Deleteing
-	$query = "DELETE FROM {$active_page} WHERE id = {$destinationid} LIMIT 1;";
-	$result = mysqli_query($connection, $query); 
-	confirm_query($result);
-	
-	// 3 - Move Item 
-	$query = "UPDATE {$active_page} SET id = {$destinationid} WHERE id = {$moveid} LIMIT 1;";
-	$result = mysqli_query($connection, $query);
-	confirm_query($result);
-	
-	// 4 - Inserting deleted item  
-	$query = "INSERT INTO {$active_page} (";
-	$query .= " id, videocode";
-	$query .= ") VALUES (";
-	$query .= " {$moveid}, '{$deleteditem['videocode']}'";
-	$query .= ")";
-	$result = mysqli_query($connection, $query); 
-	confirm_query($result);
-
-	// Finished. 
-	$_SESSION["message"] = "Video positions updated!"; 
+	$_SESSION["message"] = swap_media_positions("videos", $moveid, $destinationid)
+		? "Video positions updated!" : "Video positions could not be updated safely.";
 	redirect_to("index.php?redirect=videos");
 }
 ?>

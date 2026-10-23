@@ -9,7 +9,7 @@
 
 <?php 
 // Add a song.
-if (isset($_POST["submit"])) {
+if (isset($_POST["submit"]) && $admin) {
 	echo "Yes submit";
 	// Is there a song to be added to the database? 
 	if(!empty($_POST["newsong"])) {
@@ -82,42 +82,8 @@ if (isset($_GET["movedirection"]) && $admin) {
 	}
 
 
-	/*
-	INSTRUCTIONS: 
-	1. Store destination in temp var. 
-	2. Delete destination. 
-	3. Update position. 
-	4. Reinsert updated destination. 
-	*/
-
-	// 1 - Selecting
-	$query = "SELECT * FROM songs WHERE id = {$destinationid} LIMIT 1;"; 
-	$result = mysqli_query($connection, $query); 
-	confirm_query($result);
-	$deletedsong = mysqli_fetch_assoc($result);
-	
-	// 2 - Deleteing
-	$query = "DELETE FROM songs WHERE id = {$destinationid} LIMIT 1;";
-	$result = mysqli_query($connection, $query); 
-	confirm_query($result);
-	
-	// 3 - Move Song 
-	$query = "UPDATE songs SET id = {$destinationid} WHERE id = {$movesongid} LIMIT 1;";
-	$result = mysqli_query($connection, $query);
-	confirm_query($result);
-	
-
-	// 4 - Inserting deleted song  
-	$query = "INSERT INTO songs (";
-	$query .= " id, songcode";
-	$query .= ") VALUES (";
-	$query .= " {$movesongid}, '{$deletedsong['songcode']}'";
-	$query .= ")";
-	$result = mysqli_query($connection, $query); 
-	confirm_query($result);
-
-	// Finished. 
-	$_SESSION["message"] = "Song positions updated!"; 
+	$_SESSION["message"] = swap_media_positions("songs", $movesongid, $destinationid)
+		? "Song positions updated!" : "Song positions could not be updated safely.";
 	redirect_to("index.php?redirect=songs");
 } 
 

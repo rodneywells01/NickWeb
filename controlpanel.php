@@ -2,6 +2,7 @@
 <?php require_once("includes/functions.php"); ?>
 <?php require_once("includes/validation_functions.php"); ?>
 <?php require_once("includes/session.php"); ?>
+<?php confirm_logged_in(); ?>
 <?php $active_page = "controlpanel"; ?>
 <link rel="stylesheet" type="text/css" href="stylesheets/controlpanel.css">
 <?php $admin = logged_in();  ?>

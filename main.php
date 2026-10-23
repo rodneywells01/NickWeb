@@ -10,7 +10,7 @@
 
 <?php  
 // Detects if changes have been made. 
-if(isset($_POST["submit"])) {
+if(isset($_POST["submit"]) && $admin) {
 	
 	$required_fields = array("title", "content");
 	validate_presences($required_fields);

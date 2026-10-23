@@ -66,8 +66,9 @@ SAPI, extensions and configuration remain unknown.
    Upgrade the actual web interpreter/packages to the fixed versions or verified
    vendor backports, retaining required extensions. Test in staging with a private
    database copy: public tabs, login/logout and administrative content/media/event
-   changes. This repository has no database schema/fixtures or verified PHP 8
-   migration history, so syntax/regression checks are not a full application test.
+   changes. The reconstructed schema and synthetic fixtures described in
+   [local testing](local-testing.md) support application E2E checks, but are not a
+   verified production schema or a complete PHP migration history.
 3. Merge `deploy/php-security.ini` into the **web SAPI's startup php.ini or scanned
    conf.d**, reviewing existing limits. Do not rely on `ini_set()`, an application
    `require`, or FPM `.user.ini` to disable upload progress before request parsing.
@@ -117,9 +118,20 @@ ordinary requests, mixed-case multipart, and body limits with fixed-length and
 chunked bodies. It does not load a PHP Apache module or test real FPM pools.
 GitHub Actions runs both suites, including PHP checks on all four fixed releases.
 
+`tests/e2e.py` now runs the real application's HTTP/session/database flows against
+a disposable synthetic MariaDB database. Its negative tests exposed missing
+authorization on home/contact/composition writes and event mutations; those paths
+now require a logged-in administrator. Contact updates preserve fields absent from
+the actual form. Media reordering now swaps IDs transactionally without deleting
+or reconstructing embed records, preserving apostrophes and rolling back injected
+SQL failures. Reordering safely refuses non-InnoDB tables; verify production table
+engines before deployment. No table engine conversion is performed by this PR.
+
 The review is focused on the October advisory. Legacy authentication/authorization,
 CSRF, SQL construction, output escaping and credential handling need separate
 work. Credentials found in tracked configuration/client assets were not tested
 or reproduced here; the owner should review and rotate any still-valid exposed
-secrets. No database integration, full UI test, production configuration audit or
-proof of absence of all fatal-error paths is included.
+secrets. The synthetic database suite does not establish the deployed schema,
+production configuration, third-party integrations or absence of every fatal-error
+path. Manual local browser checks cover the existing About/Events AJAX navigation
+and administrator login; external fonts, embeds and message delivery are blocked.

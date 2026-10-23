@@ -17,6 +17,10 @@ With Python 3 and patched PHP on PATH, run `python3 tests/run.py` (or set
 connecting to the site's database or sending email. `python3 tests/apache.py`
 additionally tests the Apache example using Docker and synthetic files.
 
+For the actual application, sessions, login and SQL flows, see
+[the isolated local database and E2E instructions](docs/local-testing.md).
+The fixtures are reconstructed from source and contain no production records.
+
 ### Deploy Strategy 
 
 Git Pull. Sue me. A product of a naive Sophomore Student. 
